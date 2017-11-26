@@ -7,4 +7,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.edgeboard.edgeboard.SquareActivity">
 
+    <Button
+        android:id="@+id/speech_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Click to Speech"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/speech_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Common say this bitch" />
+
 </RelativeLayout>
