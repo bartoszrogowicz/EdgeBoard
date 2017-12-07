@@ -10,22 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.edgeboard.edgeboard.drawing.TouchSquareLayout;
 import org.w3c.dom.Text;
 
 import java.util.Locale;
-
 public class SquareActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
-
-    //private final TextToSpeechUtils tts = new TextToSpeechUtils();
+    TouchSquareLayout touchSquareLayout;
     private TextToSpeechUtils tts;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_square);
         TextToSpeech speechHandle = new TextToSpeech(this, this);
         tts = new TextToSpeechUtils(speechHandle);
-
+        touchSquareLayout = new TouchSquareLayout(this);
+        setContentView(touchSquareLayout);
         configureSpeechButton();
     }
 
