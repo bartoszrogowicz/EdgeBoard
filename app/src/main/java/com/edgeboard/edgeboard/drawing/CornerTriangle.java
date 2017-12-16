@@ -1,6 +1,7 @@
 package com.edgeboard.edgeboard.drawing;
 
 import android.graphics.Path;
+import android.graphics.Region;
 
 /**
  * Created by Krystian on 2017-11-28.
@@ -8,71 +9,59 @@ import android.graphics.Path;
 public class CornerTriangle {
 
     private Point cornerPoint, horizontalPoint, verticalPoint;
+    private Region region, clip;
     private float sideLength;
+    private CornerType cornerType;
 
-    CornerTriangle() {}
+    CornerTriangle(float cornerX, float cornerY, float sideLength, Region clip) {
+        setTriangle(cornerX, cornerY);
+        this.clip = clip;
+        this.sideLength = sideLength;
+        this.region = new Region();
+        this.cornerType = CornerType.NONE;
+    }
 
-    public void setTriangle(float x, float y, float sideLength) {
+    public Region getRegion() {
+        return region;
+    }
+    public CornerType getCornerType() { return cornerType; }
+
+    public void setTriangle(float x, float y) {
         cornerPoint = new Point(x, y);
         horizontalPoint = new Point();
         this.horizontalPoint.setY(y);
         verticalPoint = new Point();
         this.verticalPoint.setX(x);
-        this.sideLength = sideLength;
     }
 
-    public Point getCornerPoint() {
-        return cornerPoint;
+    public void setAsTopLeft() {
+        setCornerTriangle(sideLength, sideLength);
+        cornerType = CornerType.TOP_LEFT;
+    }
+    public void setAsTopRight() {
+        setCornerTriangle(-sideLength, sideLength);
+        cornerType = CornerType.TOP_RIGHT;
+    }
+    public void setAsBottomLeft() {
+        setCornerTriangle(sideLength, -sideLength);
+        cornerType = CornerType.BOT_LEFT;
+    }
+    public void setAsBottomRight() {
+        setCornerTriangle(-sideLength, -sideLength);
+        cornerType = CornerType.BOT_RIGHT;
     }
 
-    public void setCornerPoint(Point cornerPoint) {
-        this.cornerPoint = cornerPoint;
-    }
-
-    public Point getHorizontalPoint() {
-        return horizontalPoint;
-    }
-
-    public void setHorizontalPoint(Point horizontalPoint) {
-        this.horizontalPoint = horizontalPoint;
-    }
-
-    public Point getVerticalPoint() {
-        return verticalPoint;
-    }
-
-    public void setVerticalPoint(Point verticalPoint) {
-        this.verticalPoint = verticalPoint;
-    }
-
-    public void setAsTopLeft(float x, float y, float sideLength) {
-        setTriangle(x, y, sideLength);
-        horizontalPoint.setX(cornerPoint.getX() + sideLength);
-        verticalPoint.setY(cornerPoint.getY() + sideLength);
-    }
-    public void setAsTopRight(float x, float y, float sideLength) {
-        setTriangle(x, y, sideLength);
-        horizontalPoint.setX(cornerPoint.getX() - sideLength);
-        verticalPoint.setY(cornerPoint.getY() + sideLength);
-    }
-    public void setAsBottomLeft(float x, float y, float sideLength) {
-        setTriangle(x, y, sideLength);
-        horizontalPoint.setX(cornerPoint.getX() + sideLength);
-        verticalPoint.setY(cornerPoint.getY() - sideLength);
-    }
-    public void setAsBottomRight(float x, float y, float sideLength) {
-        setTriangle(x, y, sideLength);
-        horizontalPoint.setX(cornerPoint.getX() - sideLength);
-        verticalPoint.setY(cornerPoint.getY() - sideLength);
+    private void setCornerTriangle(float xSide, float ySide) {
+        horizontalPoint.setX(cornerPoint.getX() + xSide);
+        verticalPoint.setY(cornerPoint.getY() + ySide);
+        this.region.setPath(getPath(), clip);
     }
 
     public Path getPath() {
         Path p = new Path();
         p.moveTo(cornerPoint.getX(), cornerPoint.getY());
         p.lineTo(horizontalPoint.getX(), horizontalPoint.getY());
-        // p.moveTo(horizontalPoint.getX(), horizontalPoint.getY());
         p.lineTo(verticalPoint.getX(), verticalPoint.getY());
-        // p.moveTo(verticalPoint.getX(), verticalPoint.getY());
         p.lineTo(cornerPoint.getX(), cornerPoint.getY());
         p.close();
         return p;

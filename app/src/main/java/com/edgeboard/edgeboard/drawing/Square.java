@@ -15,6 +15,22 @@ public class Square {
 
     Square() {}
 
+    Square(float w, float h) {
+        setSquare(w, h);
+    }
+
+    public void setSquare(float w, float h) {
+        float squareSideLength = Math.min(w,h)/2;
+
+        float widthCenter = w / 2;
+        float heightCenter = h / 2;
+
+        left = widthCenter - squareSideLength;
+        right = widthCenter + squareSideLength;
+        top = heightCenter - squareSideLength;
+        bottom = heightCenter + squareSideLength;
+    }
+
     public void setSquare(float leftSide, float rightSide, float topSide, float bottomSide) {
         float maxWidth = rightSide - leftSide;
         float maxHeight = bottomSide - topSide;

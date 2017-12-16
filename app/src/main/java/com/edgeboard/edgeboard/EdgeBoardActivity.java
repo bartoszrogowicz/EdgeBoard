@@ -1,9 +1,9 @@
 package com.edgeboard.edgeboard;
 
-//import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.os.Vibrator;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
@@ -12,15 +12,14 @@ import android.widget.Button;
 
 public class EdgeBoardActivity extends AppCompatActivity {
 
-   // Vibrator vibrator;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edge_board);
-
-       // vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
         configureStartButton();
         configureTutorialButton();
     }
@@ -31,7 +30,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(EdgeBoardActivity.this, SquareActivity.class));
-               // vibrator.vibrate(500);
+                vibrator.vibrate(500);
             }
         });
     }
@@ -41,8 +40,8 @@ public class EdgeBoardActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EdgeBoardActivity.this, ModeSelectActivity.class));
-               // vibrator.vibrate(500);
+                startActivity(new Intent(EdgeBoardActivity.this, SquareActivity.class));
+                vibrator.vibrate(500);
             }
         });
     }

@@ -39,15 +39,15 @@ public class TextToSpeechUtils extends AppCompatActivity implements TextToSpeech
 
     private void configureSpeechButton() {
 
-        Button btnSpeak = (Button) findViewById(R.id.speech_button);
-        btnSpeak.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                EditText textPlain = (EditText) findViewById(R.id.speech_text);
-                speakOut(textPlain);
-            }
-        });
+//        Button btnSpeak = (Button) findViewById(R.id.speech_button);
+//        btnSpeak.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                EditText textPlain = (EditText) findViewById(R.id.speech_text);
+//                speakOut(textPlain);
+//            }
+//        });
     }
 
     @Override

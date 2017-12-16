@@ -1,19 +1,14 @@
 package com.edgeboard.edgeboard;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.content.Context;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.edgeboard.edgeboard.drawing.TouchSquareLayout;
-import org.w3c.dom.Text;
 
-import java.util.Locale;
 public class SquareActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
     TouchSquareLayout touchSquareLayout;
     private TextToSpeechUtils tts;
@@ -21,26 +16,16 @@ public class SquareActivity extends AppCompatActivity implements TextToSpeech.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_square);
-        TextToSpeech speechHandle = new TextToSpeech(this, this);
-        tts = new TextToSpeechUtils(speechHandle);
-        touchSquareLayout = new TouchSquareLayout(this);
-        setContentView(touchSquareLayout);
-        configureSpeechButton();
+
+        LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        touchSquareLayout = new TouchSquareLayout(this, v);
+        layout.addView(touchSquareLayout);
+
     }
 
-
-    private void configureSpeechButton() {
-
-        Button btnSpeak = (Button) findViewById(R.id.speech_button);
-        btnSpeak.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                EditText textPlain = (EditText) findViewById(R.id.speech_text);
-                tts.speakOut(textPlain);
-            }
-        });
-    }
 
     @Override
     public void onInit(int status) {
@@ -49,8 +34,7 @@ public class SquareActivity extends AppCompatActivity implements TextToSpeech.On
 
     @Override
     public void onDestroy() {
-        tts.destroySpeech();
+        //tts.destroySpeech();
         super.onDestroy();
     }
-
 }

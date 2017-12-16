@@ -8,9 +8,23 @@
     tools:context="com.edgeboard.edgeboard.SquareActivity">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"></LinearLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TEXT!!!!"
+        android:id="@+id/text1"
+        android:textColor="#FF00FF" />
+
+
 </RelativeLayout>
