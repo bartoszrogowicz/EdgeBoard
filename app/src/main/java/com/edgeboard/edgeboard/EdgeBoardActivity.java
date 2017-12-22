@@ -29,7 +29,11 @@ public class EdgeBoardActivity extends AppCompatActivity {
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EdgeBoardActivity.this, SquareActivity.class));
+                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("state", false);
+                intent.putExtras(b);
+                startActivity(intent);
                 vibrator.vibrate(500);
             }
         });
@@ -40,7 +44,11 @@ public class EdgeBoardActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EdgeBoardActivity.this, SquareActivity.class));
+                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("state", true);
+                intent.putExtras(b);
+                startActivity(intent);
                 vibrator.vibrate(500);
             }
         });

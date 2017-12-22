@@ -53,7 +53,8 @@ public enum Alphabet {
     NOT_A_LETTER(Collections.singletonList(CornerType.NONE), ' '),
     BACK_SPACE(Arrays.asList(CornerType.TOP_RIGHT, CornerType.TOP_LEFT), ' '),
     CLEAR(Arrays.asList(CornerType.TOP_RIGHT, CornerType.BOT_LEFT), ' '),
-    CAPITALIZE(Collections.singletonList(CornerType.TOP_LEFT), ',');
+    CAPITALIZE(Collections.singletonList(CornerType.TOP_LEFT), ' '),
+    SPEAK(Collections.singletonList(CornerType.TOP_RIGHT), ' ');
 
 
     private final List<CornerType> sequence;
@@ -85,6 +86,33 @@ public enum Alphabet {
             }
         }
         return NOT_A_LETTER;
+    }
+
+    public static Alphabet getByLetter(char letter) {
+        for(Alphabet a : Alphabet.values()) {
+            if (a.getLetter() == letter) {
+                return a;
+            }
+        }
+        return NOT_A_LETTER;
+    }
+
+    public static Alphabet getFromPangramByCharIndex(int index) {
+        return getByLetter(getPangramCharByIndex(index));
+    }
+
+    public static char getPangramCharByIndex(int index) {
+        String s = "the quick brown fox jumps over the lazy dog";
+        return s.charAt(index);
+    }
+
+    public static Alphabet getFromAlphabetByCharIndex(int index) {
+        return getByLetter(getAlphabetCharByIndex(index));
+    }
+
+    public static char getAlphabetCharByIndex(int index) {
+        String s = "abcdefghijklmnopqrstuvwxyz";
+        return s.charAt(index);
     }
 
 }
