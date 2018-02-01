@@ -11,7 +11,7 @@ public class TextToSpeechUtils {
 
     private TextToSpeech tts;
 
-    public TextToSpeechUtils(TextToSpeech tts) {
+    TextToSpeechUtils(TextToSpeech tts) {
         this.tts = tts;
     }
 

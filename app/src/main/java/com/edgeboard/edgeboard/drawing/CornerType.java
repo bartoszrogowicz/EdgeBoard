@@ -8,5 +8,5 @@ public enum CornerType {
     TOP_LEFT,
     TOP_RIGHT,
     BOT_RIGHT,
-    BOT_LEFT;
+    BOT_LEFT
 }
