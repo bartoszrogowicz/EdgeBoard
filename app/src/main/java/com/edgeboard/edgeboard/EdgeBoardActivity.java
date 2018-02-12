@@ -1,9 +1,10 @@
 package com.edgeboard.edgeboard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,11 +12,16 @@ import android.widget.Button;
 
 public class EdgeBoardActivity extends AppCompatActivity {
 
+    Vibrator vibrator;
+    private static Boolean TUTORIAL = false;
+    private static Boolean WRITING = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edge_board);
-
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
         configureStartButton();
         configureTutorialButton();
     }
@@ -25,7 +31,12 @@ public class EdgeBoardActivity extends AppCompatActivity {
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EdgeBoardActivity.this, SquareActivity.class));
+                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("state", TUTORIAL);
+                intent.putExtras(b);
+                startActivity(intent);
+                vibrator.vibrate(500);
             }
         });
     }
@@ -35,7 +46,12 @@ public class EdgeBoardActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EdgeBoardActivity.this, ModeSelectActivity.class));
+                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("state", WRITING);
+                intent.putExtras(b);
+                startActivity(intent);
+                vibrator.vibrate(500);
             }
         });
     }
