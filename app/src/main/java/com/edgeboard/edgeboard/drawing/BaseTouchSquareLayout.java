@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Region;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.edgeboard.edgeboard.R;
@@ -23,6 +26,7 @@ import java.util.List;
 public class BaseTouchSquareLayout extends View {
 
     private TextView text;
+    private EditText editText;
     private Vibrator vibrator;
     private TextToSpeechUtils textToSpeech;
     private boolean writingState;
@@ -50,6 +54,7 @@ public class BaseTouchSquareLayout extends View {
     public BaseTouchSquareLayout(Context context, Vibrator vibrator, TextToSpeechUtils textToSpeech, boolean writingState) {
         super(context);
         this.text = (TextView)((Activity)context).findViewById(R.id.text1);
+        this.editText = (EditText)((Activity)context).findViewById(R.id.editText);
         this.vibrator = vibrator;
         this.textToSpeech = textToSpeech;
         this.writingState = writingState;
@@ -58,6 +63,12 @@ public class BaseTouchSquareLayout extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        if(writingState == TUTORIAL) {
+            text.setVisibility(View.GONE);
+        } else {
+            editText.setVisibility(View.GONE);
+        }
 
         canvas.drawRect(square.getLeft(), square.getTop(), square.getRight(), square.getBottom(), squarePaint);
         for (CornerTriangle c: triangles) {
@@ -73,6 +84,26 @@ public class BaseTouchSquareLayout extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         initializeLayout(right, bottom);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                sentence.setLength(0);
+                sentence.append(editText.getText().toString());
+                text.setText(sentence.toString());
+            }
+        });
+
     }
 
     private void readActualWritingState() {
@@ -149,19 +180,22 @@ public class BaseTouchSquareLayout extends View {
     }
 
     private void handleSequenceWriting(float x, float y) {
-        prevSequenceSize = sequence.size();
+        updateSwipeSequence(x, y);
+        handleTutorialWriting();
+    }
+
+    private void handleTutorialWriting() {
         CornerType prev = CornerType.NONE;
         if(sequence.size() > 0) {
             prev = sequence.get(sequence.size() - 1);
         }
-        updateSwipeSequence(x, y);
+        prevSequenceSize = sequence.size();
         if (writingState == TUTORIAL && sequence.size() != prevSequenceSize) {
             if (sequence.get(sequence.size() - 1) != prev) {
                 handleTutorial();
             }
         }
     }
-
     private void handleLearningStateChange() {
         if(sequence.size() == 1 && sequence.get(0) == CornerType.TOP_RIGHT) {
             switch(learningState) {
@@ -170,9 +204,12 @@ public class BaseTouchSquareLayout extends View {
                     textToSpeech.readText("now learning: Pangram");
                     break;
                 case PANGRAM:
+                    learningState = LearningState.TEXT;
+                    textToSpeech.readText("now learning: Text from a friend");
+                    break;
+                case TEXT:
                     learningState = LearningState.ALPHABET;
                     textToSpeech.readText("now learning: Alphabet");
-                    break;
                 default:
                     break;
             }
@@ -220,8 +257,10 @@ public class BaseTouchSquareLayout extends View {
         Alphabet currentCharToLearn;
         if (learningState == LearningState.ALPHABET) {
             currentCharToLearn = Alphabet.getFromAlphabetByCharIndex(currentLetterIndex);
-        } else {
+        } else if(learningState == LearningState.PANGRAM) {
             currentCharToLearn = Alphabet.getFromPangramByCharIndex(currentLetterIndex);
+        } else {
+            currentCharToLearn = Alphabet.getByLetter(sentence.charAt(currentLetterIndex));
         }
         int charSize = currentCharToLearn.getSequence().size();
         int seqSize = sequence.size();
