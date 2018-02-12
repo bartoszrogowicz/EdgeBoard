@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.edgeboard.edgeboard.drawing.TouchSquareLayout;
+import com.edgeboard.edgeboard.drawing.BaseTouchSquareLayout;
 
 import java.util.Locale;
 
@@ -30,8 +30,8 @@ public class SquareActivity extends AppCompatActivity implements TextToSpeech.On
 
         Bundle b = getIntent().getExtras();
         boolean writingState = b.getBoolean("state");
-        TouchSquareLayout touchSquareLayout = new TouchSquareLayout(this, vibrator, ttsUtils, writingState);
-        layout.addView(touchSquareLayout);
+        BaseTouchSquareLayout baseTouchSquareLayout = new BaseTouchSquareLayout(this, vibrator, ttsUtils, writingState);
+        layout.addView(baseTouchSquareLayout);
     }
 
     @Override
@@ -42,7 +42,6 @@ public class SquareActivity extends AppCompatActivity implements TextToSpeech.On
         }
         super.onDestroy();
     }
-
 
     @Override
     public void onInit(int status) {

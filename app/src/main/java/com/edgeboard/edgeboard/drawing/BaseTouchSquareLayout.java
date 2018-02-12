@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Krystian on 2017-11-28.
  */
-public class TouchSquareLayout extends View {
+public class BaseTouchSquareLayout extends View {
 
     private TextView text;
     private Vibrator vibrator;
@@ -43,11 +43,11 @@ public class TouchSquareLayout extends View {
     private StringBuilder sentence = new StringBuilder();
     private boolean capitalize = false;
 
-    public TouchSquareLayout(Context context) {
+    public BaseTouchSquareLayout(Context context) {
         super(context);
     }
 
-    public TouchSquareLayout(Context context, Vibrator vibrator, TextToSpeechUtils textToSpeech, boolean writingState) {
+    public BaseTouchSquareLayout(Context context, Vibrator vibrator, TextToSpeechUtils textToSpeech, boolean writingState) {
         super(context);
         this.text = (TextView)((Activity)context).findViewById(R.id.text1);
         this.vibrator = vibrator;
@@ -121,38 +121,44 @@ public class TouchSquareLayout extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-                if(writingState == WRITING) {
-                    handleWriting();
-                } else {
-                    handleLearningStateChange();
-                }
-                sequence.clear();
-                prevSequenceSize = 0;
-                lastSelectedCorner = CornerType.NONE;
-                correctLetterWrote = false;
+                handleCompletedSequence();
                 invalidate();
                 return false;
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
-                prevSequenceSize = sequence.size();
-                CornerType prev = CornerType.NONE;
-                if(sequence.size() > 0) {
-                    prev = sequence.get(sequence.size() - 1);
-                }
-                updateSwipeSequence(event.getX(), event.getY());
-                if (writingState == TUTORIAL && sequence.size() != prevSequenceSize) {
-                    if (sequence.get(sequence.size() - 1) != prev) {
-                        handleTutorial();
-                    }
-                }
-
+                handleSequenceWriting(event.getX(), event.getY());
                 invalidate();
                 return true;
             default:
                 return false;
+        }
+    }
+
+    private void handleCompletedSequence() {
+        if(writingState == WRITING) {
+            handleWriting();
+        } else {
+            handleLearningStateChange();
+        }
+        sequence.clear();
+        prevSequenceSize = 0;
+        lastSelectedCorner = CornerType.NONE;
+        correctLetterWrote = false;
+    }
+
+    private void handleSequenceWriting(float x, float y) {
+        prevSequenceSize = sequence.size();
+        CornerType prev = CornerType.NONE;
+        if(sequence.size() > 0) {
+            prev = sequence.get(sequence.size() - 1);
+        }
+        updateSwipeSequence(x, y);
+        if (writingState == TUTORIAL && sequence.size() != prevSequenceSize) {
+            if (sequence.get(sequence.size() - 1) != prev) {
+                handleTutorial();
+            }
         }
     }
 

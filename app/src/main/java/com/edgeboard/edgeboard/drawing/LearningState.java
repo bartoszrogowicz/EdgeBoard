@@ -5,7 +5,8 @@ package com.edgeboard.edgeboard.drawing;
  */
 public enum LearningState {
     PANGRAM("pangram"),
-    ALPHABET("alphabet");
+    ALPHABET("alphabet"),
+    TEXT("text");
 
     private String value;
 

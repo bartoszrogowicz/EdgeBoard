@@ -13,6 +13,8 @@ import android.widget.Button;
 public class EdgeBoardActivity extends AppCompatActivity {
 
     Vibrator vibrator;
+    private static Boolean TUTORIAL = false;
+    private static Boolean WRITING = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
                 Bundle b = new Bundle();
-                b.putBoolean("state", false);
+                b.putBoolean("state", TUTORIAL);
                 intent.putExtras(b);
                 startActivity(intent);
                 vibrator.vibrate(500);
@@ -46,7 +48,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
                 Bundle b = new Bundle();
-                b.putBoolean("state", true);
+                b.putBoolean("state", WRITING);
                 intent.putExtras(b);
                 startActivity(intent);
                 vibrator.vibrate(500);
