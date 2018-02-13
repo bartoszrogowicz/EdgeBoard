@@ -15,18 +15,20 @@
         android:layout_height="fill_parent">
 
         <Button
+            android:id="@+id/startButton"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="0.5"
             android:text="Start write"
-            android:id="@+id/startButton"
-            android:layout_weight="0.5"/>
+            android:textSize="30sp" />
 
         <Button
+            android:id="@+id/tutorialButton"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Tutorial"
-            android:id="@+id/tutorialButton"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Tutorial"
+            android:textSize="30sp" />
     </LinearLayout>
 </RelativeLayout>

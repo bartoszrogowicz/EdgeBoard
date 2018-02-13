@@ -20,9 +20,6 @@ import com.edgeboard.edgeboard.TextToSpeechUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Krystian on 2017-11-28.
- */
 public class BaseTouchSquareLayout extends View {
 
     private TextView text;
@@ -180,22 +177,19 @@ public class BaseTouchSquareLayout extends View {
     }
 
     private void handleSequenceWriting(float x, float y) {
-        updateSwipeSequence(x, y);
-        handleTutorialWriting();
-    }
-
-    private void handleTutorialWriting() {
         CornerType prev = CornerType.NONE;
         if(sequence.size() > 0) {
             prev = sequence.get(sequence.size() - 1);
         }
-        prevSequenceSize = sequence.size();
+        updateSwipeSequence(x, y);
         if (writingState == TUTORIAL && sequence.size() != prevSequenceSize) {
             if (sequence.get(sequence.size() - 1) != prev) {
                 handleTutorial();
             }
         }
+        prevSequenceSize = sequence.size();
     }
+
     private void handleLearningStateChange() {
         if(sequence.size() == 1 && sequence.get(0) == CornerType.TOP_RIGHT) {
             switch(learningState) {
@@ -206,6 +200,8 @@ public class BaseTouchSquareLayout extends View {
                 case PANGRAM:
                     learningState = LearningState.TEXT;
                     textToSpeech.readText("now learning: Text from a friend");
+                    sentence.setLength(0);
+                    sentence.append(editText.getText().toString());
                     break;
                 case TEXT:
                     learningState = LearningState.ALPHABET;
@@ -279,13 +275,13 @@ public class BaseTouchSquareLayout extends View {
                         correctLetterWrote = true;
                     } else {
                         errorVibration();
-                        sequence.clear();
+                        //sequence.clear();
                         correctLetterWrote = false;
                     }
                 }
             } else {
                 errorVibration();
-                sequence.clear();
+                //sequence.clear();
             }
         } else if(charSize == seqSize && correctLetterWrote) {
                 if (sequence.get(seqSize - 1) == currentCharToLearn.getSequence().get(seqSize-1)) {
