@@ -1,15 +1,10 @@
-package com.edgeboard.edgeboard;
+package com.edgeboard.edgeboard.drawing.activities;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.LinearLayout;
-
-import com.edgeboard.edgeboard.drawing.WritingView;
 
 import java.util.Locale;
 
@@ -20,9 +15,6 @@ import java.util.Locale;
 abstract public class BaseWritingActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     protected TextToSpeech tts;
-
-    private int activityLayout;
-    private int linearLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

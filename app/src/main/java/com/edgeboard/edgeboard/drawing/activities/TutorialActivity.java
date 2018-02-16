@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard;
+package com.edgeboard.edgeboard.drawing.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 
-import com.edgeboard.edgeboard.drawing.TutorialView;
+import com.edgeboard.edgeboard.R;
+import com.edgeboard.edgeboard.TextToSpeechUtils;
+import com.edgeboard.edgeboard.drawing.tutorial.TutorialView;
 
 /**
  * Created by Krystian on 2018-02-16.

@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard.drawing;
+package com.edgeboard.edgeboard.drawing.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,7 +54,9 @@ public enum Alphabet {
     BACK_SPACE(Arrays.asList(CornerType.TOP_RIGHT, CornerType.TOP_LEFT), ' '),
     CLEAR(Arrays.asList(CornerType.TOP_RIGHT, CornerType.BOT_LEFT), ' '),
     CAPITALIZE(Collections.singletonList(CornerType.TOP_LEFT), ' '),
-    SPEAK(Collections.singletonList(CornerType.TOP_RIGHT), ' ');
+    SPEAK(Collections.singletonList(CornerType.TOP_RIGHT), ' '),
+    RESET_LEARNING_INDEX(Arrays.asList(CornerType.BOT_LEFT, CornerType.BOT_RIGHT), ' '),
+    NEXT_MODE(Arrays.asList(CornerType.BOT_RIGHT, CornerType.TOP_RIGHT), ' ');
 
 
     private final List<CornerType> sequence;
@@ -69,7 +71,7 @@ public enum Alphabet {
 
     public char getLetter() { return letter; }
 
-    static Alphabet fromValue(List<CornerType> list) {
+    public static Alphabet fromValue(List<CornerType> list) {
         boolean match;
         for(Alphabet a : Alphabet.values()) {
             if(a.getSequence().size() != list.size()) {
@@ -106,6 +108,10 @@ public enum Alphabet {
         return s.charAt(index);
     }
 
+    public static String getPangramString() {
+        return "the quick brown fox jumps over the lazy dog";
+    }
+
     public static Alphabet getFromAlphabetByCharIndex(int index) {
         return getByLetter(getAlphabetCharByIndex(index));
     }
@@ -113,6 +119,10 @@ public enum Alphabet {
     public static char getAlphabetCharByIndex(int index) {
         String s = "abcdefghijklmnopqrstuvwxyz";
         return s.charAt(index);
+    }
+
+    public static String getAlphabethString() {
+        return "abcdefghijklmnopqrstuvwxyz";
     }
 
 }

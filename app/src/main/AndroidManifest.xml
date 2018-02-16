@@ -11,7 +11,7 @@
         android:fullBackupContent="true">
 
         <activity
-            android:name=".MenuScreenActivity"
+            android:name=".drawing.activities.MenuScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SquareActivity" />
-        <activity android:name=".WritingActivity" />
-        <activity android:name=".TutorialActivity" />
+        <activity android:name=".drawing.activities.WritingActivity" />
+        <activity android:name=".drawing.activities.TutorialActivity" />
     </application>
 
 </manifest>

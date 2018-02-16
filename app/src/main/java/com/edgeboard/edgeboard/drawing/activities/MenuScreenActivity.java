@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard;
+package com.edgeboard.edgeboard.drawing.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import com.edgeboard.edgeboard.R;
 
 public class MenuScreenActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class MenuScreenActivity extends AppCompatActivity {
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuScreenActivity.this, SquareActivity.class);
+                Intent intent = new Intent(MenuScreenActivity.this, TutorialActivity.class);
                 Bundle b = new Bundle();
                 b.putBoolean("state", TUTORIAL);
                 intent.putExtras(b);
@@ -64,12 +66,7 @@ public class MenuScreenActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

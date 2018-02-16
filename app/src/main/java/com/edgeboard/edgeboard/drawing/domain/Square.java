@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard.drawing;
+package com.edgeboard.edgeboard.drawing.domain;
 
 /**
  * Created by Krystian on 2017-12-07.
@@ -13,11 +13,11 @@ public class Square {
     private float top;
     private float bottom;
 
-    Square(float w, float h) {
+    public Square(float w, float h) {
         setSquare(w, h);
     }
 
-    public void setSquare(float w, float h) {
+    private void setSquare(float w, float h) {
         float squareSideLength = Math.min(w,h)/2;
 
         float widthCenter = w / 2;
@@ -51,16 +51,6 @@ public class Square {
 
     public float getHeight() {
         return bottom-top;
-    }
-
-    public void scaleSquare(float scale) {
-        float deltaHeight = (getHeight() * (1 - scale))/2;
-        float deltaWidth = (getWidth() * (1 - scale))/2;
-
-        left += deltaWidth;
-        right -= deltaWidth;
-        top += deltaHeight;
-        bottom -= deltaHeight;
     }
 
 }

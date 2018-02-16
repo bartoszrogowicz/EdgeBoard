@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard.drawing;
+package com.edgeboard.edgeboard.drawing.domain;
 
 import android.graphics.Path;
 import android.graphics.Region;
@@ -13,7 +13,7 @@ public class CornerTriangle {
     private float sideLength;
     private CornerType cornerType;
 
-    CornerTriangle(float cornerX, float cornerY, float sideLength, Region clip) {
+    public CornerTriangle(float cornerX, float cornerY, float sideLength, Region clip) {
         setTriangle(cornerX, cornerY);
         this.clip = clip;
         this.sideLength = sideLength;

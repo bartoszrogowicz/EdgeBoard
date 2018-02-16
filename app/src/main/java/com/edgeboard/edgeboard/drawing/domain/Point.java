@@ -1,4 +1,4 @@
-package com.edgeboard.edgeboard.drawing;
+package com.edgeboard.edgeboard.drawing.domain;
 
 /**
  * Created by Krystian on 2017-12-07.

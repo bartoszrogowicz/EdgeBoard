@@ -7,20 +7,19 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.edgeboard.edgeboard.TextToSpeechUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.edgeboard.edgeboard.drawing.domain.CornerTriangle;
 
 /**
  * Created by Krystian on 2017-12-23.
  */
 
-public abstract class BaseWritingView extends View implements SequenceService, TrianglesService {
+public abstract class BaseWritingView extends View {
 
     protected Vibrator vibrator;
     protected TextToSpeechUtils ttsUtils;
 
-    protected List<CornerType> sequence = new ArrayList<>();
+    protected TrianglesService trianglesService;
+    protected WritingSequenceService writingSequenceService;
 
     public BaseWritingView(Context context) {
         super(context);
@@ -30,24 +29,30 @@ public abstract class BaseWritingView extends View implements SequenceService, T
         super(context);
         this.vibrator = vibrator;
         this.ttsUtils = ttsUtils;
+        this.trianglesService = new TrianglesService();
+        this.writingSequenceService = new WritingSequenceService(trianglesService, vibrator);
     }
 
+    /**
+     * Carried out before ${onDraw()}
+     */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        prepareTriangles();
-    }
-
-    public void prepareTriangles() {
-        // prepare triangles to draw in onDraw()
+        trianglesService.prepareScaledTriangles(right, bottom);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //draw triangles
+        drawTriangles(canvas);
     }
 
+    private void drawTriangles(Canvas canvas) {
+        for(CornerTriangle c : trianglesService.triangles) {
+            canvas.drawPath(c.getPath(), trianglesService.paint);
+        }
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -58,7 +63,7 @@ public abstract class BaseWritingView extends View implements SequenceService, T
                 return false;
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
-                updateSequence(event.getX(), event.getY());
+                writingSequenceService.updateSequence(event.getX(), event.getY());
                 handleWriting();
                 invalidate();
                 return true;
@@ -67,12 +72,14 @@ public abstract class BaseWritingView extends View implements SequenceService, T
         }
     }
 
+    /**
+     * Method carried after ending of touching screen.
+     */
     public abstract void handleEndOfSequence();
 
-    public void updateSequence(final float x, final float y) {
-
-    }
-
+    /**
+     * Method carried While touching screen. Sequence is already updated.
+     */
     protected abstract void handleWriting();
 
 }
