@@ -5,6 +5,6 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context=".EdgeBoard">
 
-    <include layout="@layout/content_edge_board" />
+    <include layout="@layout/activity_menu" />
 
 </android.support.design.widget.CoordinatorLayout>

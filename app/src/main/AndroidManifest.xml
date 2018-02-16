@@ -11,8 +11,7 @@
         android:fullBackupContent="true">
 
         <activity
-            android:name=".EdgeBoardActivity"
-            android:label="@string/app_name"
+            android:name=".MenuScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SquareActivity" >
-        </activity>
+        <activity android:name=".SquareActivity" />
+        <activity android:name=".WritingActivity" />
+        <activity android:name=".TutorialActivity" />
     </application>
 
 </manifest>

@@ -1,37 +1,33 @@
 package com.edgeboard.edgeboard;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.edgeboard.edgeboard.drawing.BaseTouchSquareLayout;
+import com.edgeboard.edgeboard.drawing.WritingView;
 
 import java.util.Locale;
 
-public class SquareActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+/**
+ * Created by Krystian on 2018-02-15.
+ */
 
-    private TextToSpeech tts;
+abstract public class BaseWritingActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+
+    protected TextToSpeech tts;
+
+    private int activityLayout;
+    private int linearLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-
         this.tts = new TextToSpeech(this, this);
-        TextToSpeechUtils ttsUtils = new TextToSpeechUtils(tts);
-        setContentView(R.layout.activity_write);
-
-        LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
-
-        Bundle b = getIntent().getExtras();
-        boolean writingState = b.getBoolean("state");
-        BaseTouchSquareLayout baseTouchSquareLayout = new BaseTouchSquareLayout(this, vibrator, ttsUtils, writingState);
-        layout.addView(baseTouchSquareLayout);
     }
 
     @Override

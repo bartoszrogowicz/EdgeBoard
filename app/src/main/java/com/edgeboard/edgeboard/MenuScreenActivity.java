@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class EdgeBoardActivity extends AppCompatActivity {
+public class MenuScreenActivity extends AppCompatActivity {
 
     Vibrator vibrator;
     private static Boolean TUTORIAL = false;
@@ -19,7 +19,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edge_board);
+        setContentView(R.layout.activity_menu_screen);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(500);
         configureStartButton();
@@ -31,7 +31,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Intent intent = new Intent(MenuScreenActivity.this, SquareActivity.class);
                 Bundle b = new Bundle();
                 b.putBoolean("state", TUTORIAL);
                 intent.putExtras(b);
@@ -46,7 +46,7 @@ public class EdgeBoardActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EdgeBoardActivity.this, SquareActivity.class);
+                Intent intent = new Intent(MenuScreenActivity.this, WritingActivity.class);
                 Bundle b = new Bundle();
                 b.putBoolean("state", WRITING);
                 intent.putExtras(b);
@@ -58,7 +58,6 @@ public class EdgeBoardActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edge_board, menu);
         return true;
     }

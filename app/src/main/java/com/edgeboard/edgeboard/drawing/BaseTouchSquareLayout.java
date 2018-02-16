@@ -67,7 +67,7 @@ public class BaseTouchSquareLayout extends View {
             editText.setVisibility(View.GONE);
         }
 
-        canvas.drawRect(square.getLeft(), square.getTop(), square.getRight(), square.getBottom(), squarePaint);
+        //canvas.drawRect(square.getLeft(), square.getTop(), square.getRight(), square.getBottom(), squarePaint);
         for (CornerTriangle c: triangles) {
             canvas.drawPath(c.getPath(), trianglePaint);
         }
@@ -120,7 +120,7 @@ public class BaseTouchSquareLayout extends View {
         Region clip = new Region(0, 0, (int)w, (int)h);
 
         this.square = new Square(w, h);
-        this.square.scaleSquare(0.8f);
+//        this.square.scaleSquare(0.8f);
         float triangleSide = square.getWidth()/2.5f;
 
         setTriangles(triangleSide, clip);

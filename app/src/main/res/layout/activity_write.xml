@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TEXT!!!!"
+        android:text=""
         android:id="@+id/text1"
-        android:textColor="#3D59AB" />
+        android:textColor="#3D59AB"
+        android:textIsSelectable="true"/>
 
     <LinearLayout
         android:id="@+id/layout"
@@ -27,15 +28,6 @@
         android:layout_below="@+id/text1">
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/text1"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
 
 
 </RelativeLayout>
