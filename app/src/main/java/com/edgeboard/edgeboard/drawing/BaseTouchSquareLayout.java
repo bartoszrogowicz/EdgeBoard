@@ -51,7 +51,7 @@ public class BaseTouchSquareLayout extends View {
     public BaseTouchSquareLayout(Context context, Vibrator vibrator, TextToSpeechUtils textToSpeech, boolean writingState) {
         super(context);
         this.text = (TextView)((Activity)context).findViewById(R.id.text1);
-        this.editText = (EditText)((Activity)context).findViewById(R.id.editText);
+        //this.editText = (EditText)((Activity)context).findViewById(R.id.editText);
         this.vibrator = vibrator;
         this.textToSpeech = textToSpeech;
         this.writingState = writingState;
@@ -64,7 +64,7 @@ public class BaseTouchSquareLayout extends View {
         if(writingState == TUTORIAL) {
             text.setVisibility(View.GONE);
         } else {
-            editText.setVisibility(View.GONE);
+            //editText.setVisibility(View.GONE);
         }
 
         //canvas.drawRect(square.getLeft(), square.getTop(), square.getRight(), square.getBottom(), squarePaint);
@@ -82,24 +82,24 @@ public class BaseTouchSquareLayout extends View {
         super.onLayout(changed, left, top, right, bottom);
         initializeLayout(right, bottom);
 
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                sentence.setLength(0);
-                sentence.append(editText.getText().toString());
-                text.setText(sentence.toString());
-            }
-        });
+//        editText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                sentence.setLength(0);
+//                sentence.append(editText.getText().toString());
+//                text.setText(sentence.toString());
+//            }
+//        });
 
     }
 
@@ -201,7 +201,7 @@ public class BaseTouchSquareLayout extends View {
                     learningState = LearningState.TEXT;
                     textToSpeech.readText("now learning: Text from a friend");
                     sentence.setLength(0);
-                    sentence.append(editText.getText().toString());
+                    //sentence.append(editText.getText().toString());
                     break;
                 case TEXT:
                     learningState = LearningState.ALPHABET;
