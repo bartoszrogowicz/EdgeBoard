@@ -58,6 +58,10 @@ public class WritingSequenceService {
     }
 
     public boolean isSequenceStopped() {
-        return prevSequenceElement == sequence.get(sequence.size() - 1);
+        if(!sequence.isEmpty()){
+            return prevSequenceElement == sequence.get(sequence.size() - 1);
+        }
+        return true;
+
     }
 }
