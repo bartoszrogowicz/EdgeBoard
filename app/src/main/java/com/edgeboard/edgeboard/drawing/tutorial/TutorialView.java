@@ -61,4 +61,7 @@ public class TutorialView extends BaseWritingView {
             tutorialService.compareSequences(writingSequenceService.sequence);
         }
     }
+
+    @Override
+    public void handleStartWriting() {}
 }

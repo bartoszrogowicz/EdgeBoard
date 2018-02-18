@@ -62,6 +62,7 @@ public abstract class BaseWritingView extends View {
                 invalidate();
                 return false;
             case MotionEvent.ACTION_DOWN:
+                handleStartWriting();
             case MotionEvent.ACTION_MOVE:
                 writingSequenceService.updateSequence(event.getX(), event.getY());
                 handleWriting();
@@ -71,6 +72,8 @@ public abstract class BaseWritingView extends View {
                 return false;
         }
     }
+
+    public abstract void handleStartWriting();
 
     /**
      * Method carried after ending of touching screen.
