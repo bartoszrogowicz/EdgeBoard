@@ -25,7 +25,7 @@ public class TutorialView extends BaseWritingView {
     }
 
     public TutorialView(Context context, Vibrator vibrator, TextToSpeechUtils ttsUtils) {
-        super(context, vibrator, ttsUtils);
+        super(context, vibrator);
         this.editText = (EditText) ((Activity)context).findViewById(R.id.editText2);
         this.tutorialService = new TutorialService(vibrator, ttsUtils, editText);
     }

@@ -14,24 +14,24 @@ import java.util.List;
  * Created by krystian on 16.02.18.
  */
 
-public class TutorialService  {
+class TutorialService  {
 
     private Vibrator vibrator;
     private TextToSpeechUtils ttsUtils;
     private EditText editText;
 
-    public String currentLearningSentence;
+    private String currentLearningSentence;
     private int currentLearningCharIndex = 0;
 
     private LearningMode currentLearningMode = LearningMode.ALPHABET;
 
-    public TutorialService(Vibrator vibrator, TextToSpeechUtils ttsUtils, EditText editText) {
+    TutorialService(Vibrator vibrator, TextToSpeechUtils ttsUtils, EditText editText) {
         this.vibrator = vibrator;
         this.ttsUtils = ttsUtils;
         this.editText = editText;
     }
 
-    public void handleTutorialActions(Alphabet alphabetAction) {
+    void handleTutorialActions(Alphabet alphabetAction) {
         switch(alphabetAction) {
             case RESET_LEARNING_INDEX:
                 currentLearningCharIndex = 0;
@@ -47,7 +47,7 @@ public class TutorialService  {
         }
     }
 
-    public void compareSequences(List<CornerType> sequence) {
+    void compareSequences(List<CornerType> sequence) {
         List<CornerType> currentLearningSequence = getCurrentModeSequence().getSequence();
         if(currentLearningSequence == Alphabet.NOT_A_LETTER.getSequence() || sequence.size() > currentLearningSequence.size()) {
             return;
@@ -88,7 +88,7 @@ public class TutorialService  {
         ttsUtils.readLetter(letter);
     }
 
-    public void updateSentence(String newSentence) {
+    void updateSentence(String newSentence) {
         currentLearningSentence = newSentence;
     }
 

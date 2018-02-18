@@ -99,10 +99,6 @@ public enum Alphabet {
         return NOT_A_LETTER;
     }
 
-    public static Alphabet getFromPangramByCharIndex(int index) {
-        return getByLetter(getPangramCharByIndex(index));
-    }
-
     public static char getPangramCharByIndex(int index) {
         String s = "the quick brown fox jumps over the lazy dog";
         return s.charAt(index);
@@ -110,10 +106,6 @@ public enum Alphabet {
 
     public static String getPangramString() {
         return "the quick brown fox jumps over the lazy dog";
-    }
-
-    public static Alphabet getFromAlphabetByCharIndex(int index) {
-        return getByLetter(getAlphabetCharByIndex(index));
     }
 
     public static char getAlphabetCharByIndex(int index) {

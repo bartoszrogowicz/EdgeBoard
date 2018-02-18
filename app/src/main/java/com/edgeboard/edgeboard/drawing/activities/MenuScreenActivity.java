@@ -14,9 +14,7 @@ import com.edgeboard.edgeboard.R;
 
 public class MenuScreenActivity extends AppCompatActivity {
 
-    Vibrator vibrator;
-    private static Boolean TUTORIAL = false;
-    private static Boolean WRITING = true;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +32,6 @@ public class MenuScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuScreenActivity.this, TutorialActivity.class);
-                Bundle b = new Bundle();
-                b.putBoolean("state", TUTORIAL);
-                intent.putExtras(b);
                 startActivity(intent);
                 vibrator.vibrate(500);
             }
@@ -49,9 +44,6 @@ public class MenuScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuScreenActivity.this, WritingActivity.class);
-                Bundle b = new Bundle();
-                b.putBoolean("state", WRITING);
-                intent.putExtras(b);
                 startActivity(intent);
                 vibrator.vibrate(500);
             }

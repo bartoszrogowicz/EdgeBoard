@@ -9,8 +9,8 @@ import android.graphics.Region;
 public class CornerTriangle {
 
     private Point cornerPoint, horizontalPoint, verticalPoint;
-    private Region region, clip;
-    private float sideLength;
+    private final Region region, clip;
+    private final float sideLength;
     private CornerType cornerType;
 
     public CornerTriangle(float cornerX, float cornerY, float sideLength, Region clip) {
@@ -26,7 +26,7 @@ public class CornerTriangle {
     }
     public CornerType getCornerType() { return cornerType; }
 
-    public void setTriangle(float x, float y) {
+    private void setTriangle(float x, float y) {
         cornerPoint = new Point(x, y);
         horizontalPoint = new Point();
         this.horizontalPoint.setY(y);

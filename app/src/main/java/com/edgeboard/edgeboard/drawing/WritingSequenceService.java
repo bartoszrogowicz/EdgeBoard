@@ -15,19 +15,19 @@ import java.util.List;
 
 public class WritingSequenceService {
 
-    public TrianglesService trianglesService;
+    private TrianglesService trianglesService;
     private Vibrator vibrator;
 
     public List<CornerType> sequence = new ArrayList<>();
     private CornerType prevSequenceElement = CornerType.NONE;
 
 
-    public WritingSequenceService(TrianglesService trianglesService, Vibrator vibrator) {
+    WritingSequenceService(TrianglesService trianglesService, Vibrator vibrator) {
         this.trianglesService = trianglesService;
         this.vibrator = vibrator;
     }
 
-    public List<CornerType>  updateSequence(float touchX, float touchY) {
+    List<CornerType>  updateSequence(float touchX, float touchY) {
         setPreviousSequenceElement();
         for (CornerTriangle cT : trianglesService.triangles) {
             if(cT.getRegion().contains((int) touchX, (int) touchY) && prevSequenceElement != cT.getCornerType()) {

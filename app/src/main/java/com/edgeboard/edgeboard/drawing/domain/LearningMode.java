@@ -8,7 +8,7 @@ public enum LearningMode {
     ALPHABET("alphabet"),
     TEXT("text");
 
-    private String value;
+    private final String value;
 
     LearningMode(String value) {
         this.value = value;

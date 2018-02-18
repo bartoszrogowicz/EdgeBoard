@@ -14,7 +14,7 @@ import java.util.Locale;
 
 abstract public class BaseWritingActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    protected TextToSpeech tts;
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

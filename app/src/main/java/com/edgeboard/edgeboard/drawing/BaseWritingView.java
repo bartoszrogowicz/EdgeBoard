@@ -15,20 +15,16 @@ import com.edgeboard.edgeboard.drawing.domain.CornerTriangle;
 
 public abstract class BaseWritingView extends View {
 
-    protected Vibrator vibrator;
-    protected TextToSpeechUtils ttsUtils;
 
-    protected TrianglesService trianglesService;
+    private TrianglesService trianglesService;
     protected WritingSequenceService writingSequenceService;
 
     public BaseWritingView(Context context) {
         super(context);
     }
 
-    public BaseWritingView(Context context, Vibrator vibrator, TextToSpeechUtils ttsUtils) {
+    protected BaseWritingView(Context context, Vibrator vibrator) {
         super(context);
-        this.vibrator = vibrator;
-        this.ttsUtils = ttsUtils;
         this.trianglesService = new TrianglesService();
         this.writingSequenceService = new WritingSequenceService(trianglesService, vibrator);
     }
@@ -73,12 +69,12 @@ public abstract class BaseWritingView extends View {
         }
     }
 
-    public abstract void handleStartWriting();
+    protected abstract void handleStartWriting();
 
     /**
      * Method carried after ending of touching screen.
      */
-    public abstract void handleEndOfSequence();
+    protected abstract void handleEndOfSequence();
 
     /**
      * Method carried While touching screen. Sequence is already updated.

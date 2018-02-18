@@ -30,7 +30,7 @@ public class WritingView extends BaseWritingView {
     }
 
     public WritingView(Context context, Vibrator vibrator, TextToSpeechUtils ttsUtils) {
-        super(context, vibrator, ttsUtils);
+        super(context, vibrator);
         this.textView = (TextView)((Activity)context).findViewById(R.id.text1);
         this.sentenceService = new SentenceService(ttsUtils);
     }
@@ -48,7 +48,7 @@ public class WritingView extends BaseWritingView {
         textView.setText(sentenceService.sentence.toString());
     }
 
-    public void showToastMessage() {
+    private void showToastMessage() {
         String time = new DecimalFormat("##.##").format(writingTimeInSeconds(startTime));
         String toastText = "You wrote a letter in " + time + "seconds";
         Toast toast = Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
@@ -63,6 +63,6 @@ public class WritingView extends BaseWritingView {
         double stopTime = System.currentTimeMillis();
         return ((stopTime - startTime) / 1000) ;
     }
-    
+
     protected void handleWriting() {}
 }

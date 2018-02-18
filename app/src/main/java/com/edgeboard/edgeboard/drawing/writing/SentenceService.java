@@ -7,18 +7,18 @@ import com.edgeboard.edgeboard.drawing.domain.Alphabet;
  * Created by krystian on 16.02.18.
  */
 
-public class SentenceService {
+class SentenceService {
 
-    public StringBuilder sentence = new StringBuilder();
+    StringBuilder sentence = new StringBuilder();
     private TextToSpeechUtils ttsUtils;
 
     private boolean capitalize = false;
 
-    public SentenceService(TextToSpeechUtils ttsUtils) {
+    SentenceService(TextToSpeechUtils ttsUtils) {
         this.ttsUtils = ttsUtils;
     }
 
-    public void updateSentenceAndReadText(Alphabet alphabetChar) {
+    void updateSentenceAndReadText(Alphabet alphabetChar) {
         switch(alphabetChar) {
             case CLEAR:
                 clearSentence();
@@ -48,7 +48,7 @@ public class SentenceService {
         }
     }
 
-    public void clearSentence() {
+    private void clearSentence() {
         sentence.setLength(0);
     }
 
